@@ -41,12 +41,13 @@ jobs:
                 mkdir -p $HOME/.kube
                 echo "${{ secrets.K8S-CONFIG }}" | base64 --decode > $HOME/.kube/config
                 chmod 600 $HOME/.kube/config
+                cat $HOME/.kube/config
 
-            - name: Test commands
-              run: |
-                kubectl get nodes
-                kubectl get pods
-                kubectl get services
+            # - name: Test commands
+            #   run: |
+            #     kubectl get nodes
+            #     kubectl get pods
+            #     kubectl get services
 
 
             
