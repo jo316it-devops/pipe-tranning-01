@@ -32,6 +32,7 @@ jobs:
         steps:
             - name: checkout code
               uses: actions/checkout@v7
+              
             - name: Set Up Kubeconfig
               uses: azure/setup-kubectl@v3
               with:
