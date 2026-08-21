@@ -43,18 +43,18 @@ jobs:
                 chmod 600 $HOME/.kube/config
                 cat $HOME/.kube/config
 
-            - name: Test commands
-              run: |
-                kubectl get nodes
-                kubectl get pods
-                kubectl get services
+            # - name: Test commands
+            #   run: |
+            #     kubectl get nodes
+            #     kubectl get pods
+            #     kubectl get services
 
 
             
-            # - name: Running manifest
-            #   uses: azure/k8s-deploy@v5
-            #   with:
-            #     manifests: |
-            #         ./k8s/deployment.yaml
-            #     images: |
-            #         ${{ secrets.DOCKER_USERNAME}}/teste-pipeline:v${{ github.run_number }}
+            - name: Running manifest
+              uses: azure/k8s-deploy@v5
+              with:
+                manifests: |
+                    ./k8s/deployment.yaml
+                images: |
+                    ${{ secrets.DOCKER_USERNAME}}/teste-pipeline:v${{ github.run_number }}
