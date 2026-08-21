@@ -39,7 +39,7 @@ jobs:
             - name: Config of Kube with base 64
               run: |
                 mkdir -p $HOME/.kube
-                echo "${{ secrets.K8S-CONFIG }}" | base64 --decode > $HOME/.kube/config
+                echo "${{ secrets.K8S_CONFIG }}" | base64 --decode > $HOME/.kube/config
                 chmod 600 $HOME/.kube/config
                 cat $HOME/.kube/config
 
