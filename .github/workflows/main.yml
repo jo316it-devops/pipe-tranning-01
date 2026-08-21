@@ -35,14 +35,25 @@ jobs:
               
             - name: Set Up Kubeconfig
               uses: azure/setup-kubectl@v3
-              with:
-                method: kubeconfig
-                kubeconfig: ${{ secrets.K8S_CONFIG }}
+              
+            - name: Config of Kube with base 64
+              run: |
+                mkdir -p $HOME/.kube
+                echo "${{ secrets.K8S-CONFIG }}" | base64 --decode > $HOME/.kube/config
+                chmod 600 $HOME/.kube/config
+
+            - name: Test commands
+              run: |
+                kubectl get nodes
+                kubectl get pods
+                kubectl get services
+
+
             
-            - name: Execute manifest
-              uses: azure/k8s-deploy@v5
-              with:
-                manifests: |
-                    ./k8s/deployment.yaml
-                images: |
-                    ${{ secrets.DOCKER_USERNAME}}/teste-pipeline:v${{ github.run_number }}
+            # - name: Running manifest
+            #   uses: azure/k8s-deploy@v5
+            #   with:
+            #     manifests: |
+            #         ./k8s/deployment.yaml
+            #     images: |
+            #         ${{ secrets.DOCKER_USERNAME}}/teste-pipeline:v${{ github.run_number }}
